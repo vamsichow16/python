@@ -1,0 +1,36 @@
+port random
+import re
+
+# Define patterns and responses
+patterns = {
+    'greeting': ['hi', 'hello', 'hey', 'howdy'],
+    'farewell': ['goodbye', 'bye', 'see you later', 'take care'],
+    'weather': ['what\'s the weather like', 'how\'s the weather today', 'tell me about the weather'],
+    'time': ['what time is it', 'can you tell me the time', 'what\'s the current time'],
+    'default': ['I didn\'t understand that.', 'Sorry, I\'m not sure what you mean.'],
+}
+
+responses = {
+    'greeting': ['Hello!', 'Hi there!', 'Hey!', 'Greetings!'],
+    'farewell': ['Goodbye!', 'Bye!', 'See you later!', 'Take care!'],
+    'weather': ['I\'m just a text-based bot and cannot provide real-time weather information.'],
+    'time': ['I don\'t have a clock, but your device can tell you the current time.'],
+    'default': ['I didn\'t get that. Can you please rephrase?', 'I\'m not sure what you mean.'],
+}
+
+# Function to generate a response based on input
+def respond(input_text):
+    for intent, patterns_list in patterns.items():
+        for pattern in patterns_list:
+            if re.search(pattern, input_text, re.IGNORECASE):
+                return random.choice(responses.get(intent, responses['default']))
+    return random.choice(responses['default'])
+
+# Main loop to handle user input
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == 'exit':
+        print("Goodbye!")
+        break
+    response = respond(user_input)
+    print("Bot:", response)
