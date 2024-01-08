@@ -1,4 +1,4 @@
-port random
+import random
 import re
 
 # Define patterns and responses
